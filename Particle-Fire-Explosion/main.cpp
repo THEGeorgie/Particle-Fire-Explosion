@@ -29,6 +29,9 @@ int main() {
 		SDL_Quit();
 		return 3;
 	}
+	else {
+		cout << "Renderer  created" << endl;
+	}
 	if (texture == NULL) {
 		cout << "Texture not created" << endl;
 
@@ -36,10 +39,18 @@ int main() {
 		SDL_Quit();
 		return 4;
 	}
+	else {
+		cout << "Texture  created" << endl;
+	}
 
 	Uint32* buffer = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
 
-	memset(buffer, 0xFF, SCREEN_WIDTH*SCREEN_HEIGHT*sizeof(Uint32));
+	buffer[30000] = 0xFFFFFFFF;
+
+
+	for (int i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; i++) {
+		buffer[i] = 0x0080FFFF;
+	}
 
 	SDL_UpdateTexture(texture, 0, buffer, SCREEN_WIDTH * sizeof(Uint32));
 	SDL_RenderClear(renderer);
