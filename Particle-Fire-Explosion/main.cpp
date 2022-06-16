@@ -20,6 +20,32 @@ int main() {
 		return 2;
 	}
 
+	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+	SDL_Texture* texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STATIC, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+	if (renderer == NULL) {
+		cout << "Renderer not created" << endl;
+		SDL_DestroyWindow(window);
+		SDL_Quit();
+		return 3;
+	}
+	if (texture == NULL) {
+		cout << "Texture not created" << endl;
+
+		SDL_DestroyRenderer(renderer);
+		SDL_Quit();
+		return 4;
+	}
+
+	Uint32* buffer = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
+
+	memset(buffer, 0xFF, SCREEN_WIDTH*SCREEN_HEIGHT*sizeof(Uint32));
+
+	SDL_UpdateTexture(texture, 0, buffer, SCREEN_WIDTH * sizeof(Uint32));
+	SDL_RenderClear(renderer);
+	SDL_RenderCopy(renderer, texture, 0, 0);
+	SDL_RenderPresent(renderer);
+
 	bool quit = false;
 	SDL_Event event;
 	
@@ -35,6 +61,10 @@ int main() {
 		}
 	}
 
+	
+	delete [] buffer;
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyTexture(texture);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 
