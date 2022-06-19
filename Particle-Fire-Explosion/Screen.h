@@ -1,8 +1,11 @@
 #pragma once
-#include "SDL.h"
-#undef main
 #ifndef SCREEN_H_
 #define SCREEN_H_
+#include "SDL.h"
+#include <iostream>
+#undef main
+using namespace std;
+
 namespace GJ {
 	class Screen
 	{
