@@ -22,6 +22,7 @@ namespace GJ {
 		SDL_Renderer* m_renderer;
 		SDL_Texture* m_texture;
 		Uint32* m_buffer;
+		SDL_Event event;
 	};
 }
 #endif // !SCREEN_H_

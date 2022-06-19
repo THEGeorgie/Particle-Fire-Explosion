@@ -64,7 +64,12 @@ namespace GJ {
 		return true;
 	}
 	bool Screen::processEvents() {
-		return false;
+		while (SDL_PollEvent(&event)) {
+			if (event.type == SDL_QUIT) {
+				return false;
+			}
+		}
+		return true;
 	}
 	void Screen::close() {
 		delete[] m_buffer;

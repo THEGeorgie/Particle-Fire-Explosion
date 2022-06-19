@@ -5,8 +5,6 @@
 using namespace std;
 using namespace GJ;
 int main() {
-	bool quit = false;
-	SDL_Event event;
 	
 	Screen screen;
 
@@ -14,16 +12,14 @@ int main() {
 		cout << "Error intilasing SDL" << endl;
 	}
 
-	while (!quit) {
+	while (true) {
 		//Update Particles
 		//Draw Particles
 		//Check for messages/events
-
-		while (SDL_PollEvent(&event)) {
-			if (event.type == SDL_QUIT) {
-				quit = true;
-			}
+		if (screen.processEvents() == false) {
+			break;
 		}
+
 	}
 
 	screen.close();
